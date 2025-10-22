@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Kitap & Film Chatbotu</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-dark text-white">
+<div class="container mt-5">
+  <h2 class="text-center">🎬📚 Kitap & Film Öneri Chatbotu</h2>
+  <div class="card bg-secondary p-4 mt-3">
+    <div id="chat-box" style="height:300px; overflow-y:auto;"></div>
+    <div class="input-group mt-3">
+      <input type="text" id="user-input" class="form-control" placeholder="Örneğin: romantik film öner...">
+      <button id="send-btn" class="btn btn-danger">Gönder</button>
+    </div>
+  </div>
+</div>
+
+<script>
+document.getElementById("send-btn").onclick = async function() {
+  const input = document.getElementById("user-input");
+  const message = input.value.trim();
+  if (!message) return;
+
+  const chatBox = document.getElementById("chat-box");
+  chatBox.innerHTML += `<p><b>Sen:</b> ${message}</p>`;
+
+  const response = await fetch("/chat", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({message})
+  });
+
+  const data = await response.json();
+  chatBox.innerHTML += `<p><b>Bot:</b> ${data.reply}</p>`;
+  input.value = "";
+  chatBox.scrollTop = chatBox.scrollHeight;
+};
+</script>
+</body>
+</html>
