@@ -1,60 +1,77 @@
-# 🎬 Kitap & Film Öneri Chatbotu
+# Kitap & Film Öneri Chatbotu
 
-Bu proje, Flask tabanlı bir web uygulamasıdır.  
-Kullanıcıdan aldığı girdiye göre Google Gemini API, OMDb ve Google Books API’lerini kullanarak dinamik film veya kitap önerileri sunar.
+Kullanıcının ilgi alanlarına ve sohbet sırasında verdiği yanıtlara göre film ve kitap önerileri sunan Flask tabanlı bir web uygulamasıdır.
 
----
+Uygulama; Google Gemini API, OMDb API ve Google Books API entegrasyonlarını kullanarak önerileri dinamik olarak oluşturur ve kullanıcıyla doğal bir sohbet akışı üzerinden etkileşim kurar.
 
-## 🚀 Teknolojiler
-- Python 3.10  
-- Flask (web framework)  
-- Google Gemini 2.0 API  
-- OMDb API (film verileri)  
-- Google Books API (kitap verileri)  
+## Projenin Amacı
 
----
+Projenin temel amacı, kullanıcıların film veya kitap ararken yalnızca sabit listelerle karşılaşması yerine, tercihlerini dikkate alan daha etkileşimli bir öneri deneyimi sunmaktır.
 
-## 🧠 Projenin Amacı
-Kullanıcıya kişisel zevklerine göre film ve kitap önerileri sunan bir akıllı sohbet sistemi geliştirmek.
+Kullanıcı istediği türü, ilgilendiği konuları veya daha önce tükettiği içerikleri belirtebilir. Chatbot, konuşmanın bağlamını dikkate alarak buna uygun yeni öneriler üretir.
 
----
+## Kullanılan Teknolojiler
 
-## 💬 Örnek Kullanım Diyalogları
+* **Python 3.10** — Uygulamanın temel programlama dili
+* **Flask** — Web uygulamasının backend yapısı ve HTTP isteklerinin yönetimi
+* **Google Gemini API** — Kullanıcı mesajlarının yorumlanması ve doğal dilde yanıt oluşturulması
+* **OMDb API** — Film bilgilerinin alınması
+* **Google Books API** — Kitap bilgilerinin alınması
 
-**Sen:** Merhaba  
-**Bot:** Merhaba! 🎬 Bugün film mi yoksa kitap mı öneriyim?
+## Özellikler
 
-**Sen:** Gerilim filmi öner  
-**Bot:** Harika! İşte birkaç öneri:  
-- *Gone Girl (2014)*  
-- *Prisoners (2013)*  
-- *Se7en (1995)*  
-Karanlık atmosferi seviyorsan bu filmler tam senlik! 
+* Film ve kitap önerileri sunma
+* Kullanıcının tercihlerini sohbet üzerinden anlayabilme
+* Önceki mesajları dikkate alarak konuşma bağlamını koruma
+* Daha önce önerilen veya kullanıcının izlediğini/okuduğunu belirttiği içeriklere göre yeni alternatifler sunma
+* Kullanıcının iletişim biçimine uygun daha doğal yanıtlar oluşturma
+* Film bilgilerini OMDb API üzerinden dinamik olarak alma
+* Kitap bilgilerini Google Books API üzerinden dinamik olarak alma
+* Mobil cihazlarla uyumlu sade web arayüzü
 
-**Sen:** Teşekkürler  
-**Bot:** Rica ederim! Başka bir tür ister misin?
+## Örnek Kullanım
 
-**Sen:** Kitap öner  
-**Bot:** Tabii! İşte birkaç popüler kitap:  
-- *Hayvan Çiftliği – George Orwell*  
-- *1984 – George Orwell*  
-- *Cesur Yeni Dünya – Aldous Huxley*
+**Kullanıcı:** Gerilim filmi öner.
 
----
+**Chatbot:**
+Gone Girl, Prisoners ve Se7en gibi gerilim ağırlıklı filmler önerebilir.
 
-## 🧠 Chatbot’un Özellikleri
-- Kullanıcının önceki konuşmalarını hatırlayabilir (örneğin: “ama bunları izledim” derse yeni öneriler verir)
-- Sohbet tonunu otomatik olarak değiştirir (samimi / ciddi)
-- Hem kitap hem film verilerini dinamik olarak dış API’lerden çeker
+**Kullanıcı:** Bunları daha önce izledim.
 
----
+**Chatbot:**
+Konuşmanın önceki kısmını dikkate alarak farklı filmler önerir.
 
-## 🧩 Geliştirme Notları
-- Flask kullanılarak web arayüzü oluşturuldu  
-- Gemini API, OMDb ve Google Books API’leri ile entegre edildi  
-- Kullanıcı deneyimi sade ve mobil uyumlu olacak şekilde tasarlandı  
+Benzer şekilde kullanıcı kitap önerisi istediğinde, tercihleri doğrultusunda Google Books API üzerinden elde edilen bilgiler kullanılarak uygun kitaplar sunulur.
 
-## 🌐 Canlı Demo
-Proje Hugging Face üzerinde yayınlanmıştır:  
-👉 [Chatbot’u Deneyin](https://huggingface.co/spaces/Berk-0/ChatBot)
+## Nasıl Çalışır?
+
+Uygulamada kullanıcıdan alınan mesaj Flask backend'e gönderilir. Mesajın içeriği ve mevcut konuşma bağlamı değerlendirilerek kullanıcının film mi yoksa kitap mı aradığı ve nasıl bir öneri istediği belirlenir.
+
+İhtiyaca göre:
+
+1. Gemini API ile kullanıcının isteği yorumlanır.
+2. Film içerikleri için OMDb API kullanılır.
+3. Kitap içerikleri için Google Books API kullanılır.
+4. Elde edilen bilgiler sohbet bağlamıyla birleştirilir.
+5. Sonuç kullanıcıya doğal bir sohbet yanıtı olarak sunulur.
+
+## Geliştirme
+
+Proje, Flask kullanılarak geliştirilen web arayüzü ile API entegrasyonlarını tek bir uygulama içerisinde bir araya getirir.
+
+Geliştirme sürecinde özellikle:
+
+* dış servislerle API entegrasyonu,
+* kullanıcı girdilerinin işlenmesi,
+* sohbet bağlamının yönetilmesi,
+* dinamik içerik oluşturulması,
+* sade ve kullanılabilir bir arayüz tasarlanması
+
+üzerine odaklanılmıştır.
+
+## Canlı Demo
+
+Uygulamanın yayınlanmış sürümüne Hugging Face Spaces üzerinden erişilebilir:
+
+[Chatbot'u Deneyin](https://huggingface.co/spaces/Berk-0/ChatBot)
 
